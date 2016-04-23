@@ -1,14 +1,11 @@
-;;;; Author: Benjamin Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "1-dimensional line minimization methods for optimization")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Parabolic extrapolation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Parabolic extrapolation")
 
 (defun parabolic-extrapolation-simple-test (a b c f)
   "Try to do a parabolic extrapolation of function f, at points a, b, and c."

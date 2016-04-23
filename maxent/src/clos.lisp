@@ -1,6 +1,6 @@
-;;;; Author: Benjamin E. Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :maxent)
 
 (defclass* whole-sentence-maxent-lm (cl-lm::pattern-lm)
@@ -17,11 +17,7 @@
   "This is the non-normalized log prob of the given sentence."
   (declare (ignore max-feature-num score-type force-feature-extraction))
   (let ((baseline-score (cl-lm::score (baseline-model lm) sentence))
-	(model-adjustment-score (cl-lm::score lm sentence))
-	;;(model-adjustment-score (call-next-method lm sentence))
-	;;(model-adjustment-score (call-next-method))
-	;;(model-adjustment-score 0)
-	) ;;?
+	(model-adjustment-score (cl-lm::score lm sentence)))
     (+ baseline-score model-adjustment-score)))
 
 (defun create-whole-sentence-maxent-lm (pattern-lm ngram-lm)

@@ -1,12 +1,14 @@
-;;;; Author Benjamin E. Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "Multidimensional numerical optimization")
 
 (defun coordinate-descent (f n &key x (tolerance *default-tolerance*) 
-			   (linemin-tolerance *default-linemin-tolerance*) (linemin *default-linemin*) (linemin-lower *default-linemin-lower*) (linemin-upper *default-linemin-upper*)
-			   (max-iter *default-max-iter*) feature-mask folder verbose)
+				 (linemin-tolerance *default-linemin-tolerance*)
+				 (linemin *default-linemin*)
+				 (linemin-lower *default-linemin-lower*)
+				 (linemin-upper *default-linemin-upper*)
+				 (max-iter *default-max-iter*) feature-mask folder verbose)
   "Minimize the given function by performing optimizations along each of the n dimensions.
    x is the starting point-- which defaults to the origin."
   (with-optimization
@@ -17,4 +19,3 @@
 						      :linemin-tolerance linemin-tolerance :linemin linemin :max-iter max-iter :linemin-lower linemin-lower :linemin-upper linemin-upper :folder folder
 						      :verbose verbose)))
       min)))
-

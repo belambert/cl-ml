@@ -122,14 +122,10 @@ estimates : lbfgs ('[F(a, b, c), [F1(a, b, c), F2(a, b, c), F3(a, b, c)]],
     (common-lisp-user::/blockdata-lb2/)
 
     (dotimes (nfeval $lbfgs_nfeval_max)
-; (format t "hey nfeval ~S~%" nfeval)
-; (format t "hey x ~S~%" x)
       (setf f (apply 'funcall `(,FOM-function ,@(coerce x 'list))))
       (let ((g-list (apply 'funcall `(,FOM-grad-function ,@(coerce x 'list)))))
-; (format t "hey g-list ~S~%" g-list)
         ; DOUBTLESS THERE IS A MORE ELEGANT WAY TO REFILL AN ARRAY FROM A LIST
         (dotimes (i n) (setf (aref g i) (nth (1+ i) g-list))))
-; (format t "hey f ~S g ~S~%" f g)
 
       (multiple-value-bind (var-0 var-1 var-2 var-3 var-4 var-5 var-6 var-7
                                   var-8 var-9 var-10 var-11 var-12)
@@ -143,5 +139,4 @@ estimates : lbfgs ('[F(a, b, c), [F1(a, b, c), F2(a, b, c), F3(a, b, c)]],
           ((eq iflag 0)
            (setq return-value (append '((mlist)) (mapcar #'(lambda (a b) `((mequal) ,a ,b)) (cdr x-list) (coerce scache 'list))))
            (return)))))
-
     return-value))

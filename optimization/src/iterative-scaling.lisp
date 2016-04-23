@@ -1,14 +1,11 @@
-;;;; Author: Ben Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "General MaxEnt code, shared by cond and wsm.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;; Iterative scaling        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Iterative scaling")
 
 (defun iterative-scaling (&key objective-function feature-expectation-function model data (iterations 10))
   "Run the iterative scaling algorithm.  This requires an objective function, an initial array of parameter values,
@@ -33,8 +30,7 @@
     ;; do the update here
     (map-into (parameters model) '+ (parameters model) model-predicted-feature-counts))
 
-(cl-user::todo "The following, the step size, is needed for improved iterative scaling?")
-
+;;;;TODO: The following, the step size, is needed for improved iterative scaling?
 (defun get-approximate-step-size-vector (model data)
   "???? Not implemented... but this is important for efficiency?"
   (declare (ignore model data))

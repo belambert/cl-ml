@@ -1,8 +1,7 @@
-;;;; Author: Benjamin E. Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "Function mostly copied from Press, et al. These may be officially copy-righted meaning we can't use them as-is (for commercial purposes?) (Only has POWELL)")
 
 (defun powell (f n &key x (tolerance *default-tolerance*) (linemin-tolerance *default-linemin-tolerance*)
 	       (linemin *default-linemin*) ximat (max-iterations 200) verbose)
@@ -62,7 +61,5 @@
 		   (setf fret (line-minimization f p xi :tolerance linemin-tolerance :linemin linemin))
 		   (dotimes (j n)
 		     (setf (aref ximat j (- ibig 1)) (aref ximat j (- n 1)))
-		     (setf (aref ximat j (- n 1)) (aref xi j))))))
-	     )))
-    ))
+		     (setf (aref ximat j (- n 1)) (aref xi j)))))))))))
 

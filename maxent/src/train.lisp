@@ -1,6 +1,6 @@
-;;;; Author: Benjamin E. Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com)
 
-(declaim (optimize (debug 3)))
 (in-package :maxent)
 
 (defun data-feature-expectations (sentences model &key importance-sampling)
@@ -18,7 +18,6 @@
 	(loop for feature across (kbasr-aux:sentence-features s) do
 	     (incf (aref expectations feature) weight))))
     ;; Turn the counts into expectations
-    ;;(alexandria:coercef denominator 'single-float)
     (alexandria:coercef denominator 'double-float)
     (if (/= denominator 0)
 	(map-into expectations (lambda (x) (coerce (/ x denominator) 'double-float)) expectations)
@@ -53,9 +52,7 @@
 	   (likelihood-function (data-log-likelihood-optimizable-function sentences me-lm))
 	   (gradient-function (gradient-function data-expectations me-lm sample)))
       (format t "Data log likelihood: ~f~%" (data-log-likelihood sentences me-lm))
-
       ;;(cl-optimization:conjugate-gradient-descent likelihood-function (length (cl-lm:parameters me-lm)) :x (cl-lm:parameters me-lm) :df gradient-function)
       ;;(cl-optimization:coordinate-descent likelihood-function (length (cl-lm:parameters me-lm)) :x (cl-lm:parameters me-lm))
-      (cl-optimization:steepest-descent likelihood-function (length (cl-lm:parameters me-lm)) :x (cl-lm:parameters me-lm) :df gradient-function)
-      )))
+      (cl-optimization:steepest-descent likelihood-function (length (cl-lm:parameters me-lm)) :x (cl-lm:parameters me-lm) :df gradient-function))))
   

@@ -1,19 +1,11 @@
-;;; Copyright Benjamin E. Lambert, 2005-2011
-;;; All rights reserved
-;;; Please contact author regarding licensing and use:
+;;; Author: Ben Lambert
 ;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :lm-training)
-(cl-user::file-summary "A hodge-podge of 'training' related functions")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;; Training  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Training")
-
-(cl-user::subsection "Piecewise training")
  
 (defun train-model-pairwise-count-correct (train pattern-file model-file &rest rest &key contains-correct-only ensure-contains-correct score-type &allow-other-keys)
   "Main function for optimization maximizing pairwise accuracy."
@@ -38,8 +30,6 @@
   (assert (kb-asr-ready))
   (let* ((model (apply 'train-simple-model train pattern-file (lambda (x &rest rest) (apply 'read-nbest-lists x :contains-correct-only contains-correct-only :ensure-contains-correct ensure-contains-correct rest)) 'nbest-ndcg-as-function-of-parameters-function t :score-type score-type :model-file model-file rest)))
     model))
-
-(cl-user::subsection "Helper functions")
 
 (defun negate-function (f)
   "Return a function that is the negated version of the given function."
@@ -92,7 +82,6 @@
     ;; Print an initial evaluation before doing any optimization
     ;; These two are only going to std out... should we also send them to a file in 'folder'???
     (case mode
-      ;; These print to std out...
       (:nbest (print-evaluation-statistics (evaluate-nbest-lists train-set)))
       (:pairs (print-summary-results (pairwise-evaluation model train-set :score-type score-type))))
     ;; Do the optimization
@@ -123,8 +112,8 @@
     ;; Print results on test data
     (when test
       (let ((test-set (case mode
-			(:nbest (read-nbest-lists test :parse-on-load t :parse-on-load-model model :evaluate-on-load t));; :discard-non-features t))
-			(:pairs (read-pairs test :parse-on-load t :parse-on-load-model model :evaluate-on-load t))))) ;; :discard-non-features t)))))
+			(:nbest (read-nbest-lists test :parse-on-load t :parse-on-load-model model :evaluate-on-load t))
+			(:pairs (read-pairs test :parse-on-load t :parse-on-load-model model :evaluate-on-load t)))))
 	(case mode
 	  (:nbest (evaluate-nbest-complete model test-set :folder folder :prefix "test" :score-type score-type))
 	  (:pairs (pairwise-evaluation-full model test-set :folder folder :suffix "test" :score-type score-type)))))
@@ -132,8 +121,6 @@
     (print-time-since-start)
     (format t "Finished.~%")
     model))
-
-
 
 (defun optimize-model-new (pattern-file model-file &key nbest-folder train-ctl pattern-count
 			   (optimization :coordinate) (tolerance 1d-8) (linemin-tolerance 1d-8) (gradient-epsilon 20d0) reset-parameters (linemin cl-optimization::*default-linemin*)
@@ -160,7 +147,6 @@
 	 (features (get-data-features train-set))
 	 (feature-mask (feature-mask-from-features features n)))
     (format t "Beginning optimization of ~:D of ~:D parameters.~%" (length features) n)
-
     (setf initial-model (copy-model model))
     ;; Print an initial evaluation before doing any optimization
     ;; These two are only going to std out... should we also send them to a file in 'folder'???
@@ -188,15 +174,9 @@
     ;; It should be safe to clear out the training data at this point
     model))
 
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;; Training from n-best re-ranking ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Generic training")
-
-;; Are we even using this anymore?
 
 (defun train-simple-model (folder pattern-file read-data-function objective-function-function maximize
 				 &key

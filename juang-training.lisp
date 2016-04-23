@@ -92,7 +92,6 @@
 	 (function (get-parameterized-expected-loss-function nbests lm eta :gamma gamma :theta theta :language-weight language-weight))
 	 (gradient (get-parameterized-expected-loss-gradient-function nbests lm eta :gamma gamma :theta theta :language-weight language-weight)))
     (cl-optimization:conjugate-gradient-descent function (length (parameters lm)) :df gradient)
-    ;; Return the LM:
     lm))
 						
 

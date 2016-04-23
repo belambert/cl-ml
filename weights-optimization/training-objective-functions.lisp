@@ -1,17 +1,11 @@
-;;; Copyright Benjamin E. Lambert, 2005-2011
-;;; All rights reserved
-;;; Please contact author regarding licensing and use:
-;;; ben@benjaminlambert.com
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :lm-training)
-(cl-user::file-summary "These are the functions whose values we try to optimize in training")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;; ACCURACY ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Accuracy training")
 
 (defun model-pairwise-count-correct (model pairs &key (use-sphinx-score t) max-feature-num (score-type :sum))
   "Given an model and some pairs of candidates, evaluate the model: i.e. count the number of correct decisions."
@@ -30,10 +24,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;; PAIRWISE WER ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Pairwise WER training")
-
-(cl-user::todo "It'll take some wrestling to get this to output an integer rather than an error rate")
 
 (defun model-pairwise-wer (model pairs &key (use-sphinx-score t) max-feature-num (score-type :sum))
   "Given an model and some pairs of candidates, evaluate the model: i.e. count the number of correct decisions."
@@ -57,8 +47,6 @@
 ;;;;;;; NBEST WER  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(cl-user::section "NBest WER training")
-
 (defun model-nbest-wer (model nbests &key (use-sphinx-score t) max-feature-num (score-type :sum))
   "An objective function to minimize the WER after reranking n-best lists."
   (declare (ignore use-sphinx-score)) ;;the nbest re-ranking automatically uses the sphinx score
@@ -79,8 +67,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;; NBest DCG training ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "NBest DCG training")
 
 (defun model-nbest-ndcg (model nbests &key max-feature-num (score-type :sum))
   "Objective function to maximize the NDCG after n-best re-ranking."

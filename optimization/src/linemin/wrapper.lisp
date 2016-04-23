@@ -1,16 +1,11 @@
-;;;; Author: Ben Lambert ben@benjaminlambert.com
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "1-dimensional line minimization methods for optimization")
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Wrapper function to do bracketing and minimization of a 1d-function ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Wrapper function to do bracketing and minimization of a 1d-function")
 
 (defun line-minimization-1d (f &key (ax *default-linemin-lower*) (bx *default-linemin-upper*) (tolerance *default-linemin-tolerance*) (linemin *default-linemin*) verbose)
   "Perform bracketing and minimizeation on a 1d function f.  
@@ -30,10 +25,8 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Line minimization in the context of a multidimensional optimzation ;;;;;;
+;;;; Line minimization in the context of a multidimensional optimization ;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Line minimization in the context of a multidimensional optimzation")
 
 (defun linear-objective-function (f origin vector)
   "Returns a function that can be used to do multi-dimensional line minimization using
@@ -118,4 +111,3 @@
 	  (values new-point
 		  lambda
 		  f-eval-count))))))
-    

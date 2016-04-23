@@ -1,11 +1,7 @@
-;;; Copyright Benjamin E. Lambert, 2005-2011
-;;; All rights reserved
-;;; Please contact author regarding licensing and use:
-;;; ben@benjaminlambert.com
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :lm-training)
-(cl-user::file-summary "Merging models so we can train them in pieces")
 
 (defun lm-compatible-p (lm1 lm2)
   "Check if two language models are 'compatible'..."

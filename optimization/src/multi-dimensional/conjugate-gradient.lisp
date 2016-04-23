@@ -1,8 +1,7 @@
-;;;; Author Benjamin E. Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com)
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "Multidimensional numerical optimization")
 
 (defun conjugate-gradient-descent (f n &key x df (gradient-epsilon *default-gradient-epsilon*) (max-iter *default-max-iter*) (tolerance *default-tolerance*) (linemin-tolerance *default-linemin-tolerance*) (linemin *default-linemin*)(linemin-lower *default-linemin-lower*) (linemin-upper *default-linemin-upper*) feature-mask (gradient-type *default-gradient-type*) folder verbose)
   "G-tolerance is the convergence criteria for the zero gradient text."

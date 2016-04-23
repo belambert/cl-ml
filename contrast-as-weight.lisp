@@ -1,4 +1,4 @@
-;;;; Author: Benjamin E. Lambert
+;;;; Author: Ben Lambert
 ;;;; ben@benjaminlambert.com
 
 (declaim (optimize (debug 3)))
@@ -33,16 +33,11 @@
 ;;;;;;; Wrapper functions for models to evaluate accuracy for diff parameters. ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(cl-user::section "Wrapper functions for models to evaluate accuracy for diff parameters.")
-
 (defun sweep-multiplier (model nbests &key (begin -10) (end 10) multiplier-list)
   "Do a parameter sweep and evaluation of model multipliers."
-  ;;(map nil 'clear-feature-cache nbests)
   (setf model (copy-model model))
-  ;;(setf nbests (mapcar 'copy-nbest nbests))
   (map-into nbests 'copy-nbest nbests)
-  (let (;;(evals '())
-	(points '())
+  (let ((points '())
 	(min most-positive-fixnum)
 	(min-multiplier nil)
 	(initial-weights (parameters model)))
@@ -52,7 +47,6 @@
     (dolist (multiplier multiplier-list)
 	 (setf (parameters model) (map '(vector double-float) (lambda (x) (* x multiplier)) initial-weights))
 	 (let ((eval (evaluate-model-on-nbests model nbests)))
-	   ;;(push eval evals)
 	   (push (list multiplier (net-evaluation-wer eval)) points)
 	   (format t "~:D     ~F ~%" multiplier (net-evaluation-wer eval))
 	   (when (< (net-evaluation-wer eval) min)
@@ -61,11 +55,8 @@
 	   (finish-output t)))
     ;; Set the parameters to the optimal value
     (setf (parameters model) (map '(vector double-float) (lambda (x) (* x min-multiplier)) initial-weights))
-    
-    
     (ignore-errors (gnuplot:plot-graph points :2dgraph :type :dumb :width 79 :height 24 :legend nil :debug nil :title "Multiplier sweep"))
     (format t "Min: ~F     ~d~%" min min-multiplier)
-    ;;(nreverse evals)
     model))
 
 (defun sweep-multiplier-from-file (pattern-file nbests &key (begin -10) (end 10) multiplier-list)

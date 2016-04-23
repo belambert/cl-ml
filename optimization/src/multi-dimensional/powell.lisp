@@ -1,8 +1,7 @@
-;;; Author Benjamin E. Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com)
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "Multidimensional numerical optimization")
 
 (defun powell (f n &key x (tolerance *default-tolerance*) (linemin-tolerance *default-linemin-tolerance*) (linemin *default-linemin*) (max-iter *default-max-iter*)(linemin-lower *default-linemin-lower*) (linemin-upper *default-linemin-upper*) feature-mask folder verbose)
   "Powell's method.

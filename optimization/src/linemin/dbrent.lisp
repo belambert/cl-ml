@@ -1,9 +1,7 @@
-;;;; Author: Benjamin Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "1-dimensional line minimization methods for optimization")
-
 
 (defun dbrent-linemin (f df ax bx cx &key (max-iterations 200) (tolerance *default-linemin-tolerance*))
   "A version of the Brent line minimization algorithm that uses a derivative function."

@@ -1,4 +1,5 @@
-;;;; Author: Benjamin E. Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com)
 
 (defpackage :maxent
   (:use :common-lisp)

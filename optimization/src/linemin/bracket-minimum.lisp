@@ -1,17 +1,12 @@
-;;;; Author: Benjamin Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
 ;;;; Bracketing minima
-
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "1-dimensional line minimization methods for optimization")
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Bracketing minima ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Bracketing minima")
 
 (defun bracket-minimum-core (f ax bx &optional c)
   "Return a triplet of points that bracket a minimum of 1-d function f.

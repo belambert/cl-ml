@@ -1,15 +1,11 @@
-;;;; Author Benjamin E. Lambert (ben@benjaminlambert.com)
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com)
 
-(declaim (optimize (debug 3)))
 (in-package :optimization)
-(cl-user::file-summary "Multidimensional numerical optimization")
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Direction set optimization helpers, for: coordinate descent and powell ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Direction set optimization helpers, for: coordinate descent and powell")
 
 (defun get-coordinate-directions (n &key (unit-magnitude 1.0d0) feature-mask)
   "Get a list of unit vectors along each of the coordinate directions."
@@ -39,7 +35,8 @@
     (loop for i from 1
        until (or (converged-p min prev-min tolerance) (> i max-iter)) do
 	 (when verbose (format-now t "Direction set minimization iteration #~:D~%" i))
-	 (setf p (direction-set-minimization f directions p :linemin-tolerance linemin-tolerance :linemin linemin :iteration i :linemin-lower linemin-lower :linemin-upper linemin-upper :folder folder :verbose verbose))
+	 (setf p (direction-set-minimization f directions p :linemin-tolerance linemin-tolerance :linemin linemin :iteration i
+					     :linemin-lower linemin-lower :linemin-upper linemin-upper :folder folder :verbose verbose))
 	 (setf prev-min min)
 	 (setf min (funcall f p)))
     p))

@@ -1,9 +1,5 @@
-
-;;(declaim (optimize (debug 3)))
-
 ;; Orig Copyright 2006 by Robert Dodier
 ;; Released under the terms of the GNU General Public License.
-
 
 ;;; Some parameters
 

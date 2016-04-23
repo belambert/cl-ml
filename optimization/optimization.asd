@@ -1,13 +1,9 @@
 ;;-*- Mode: Lisp -*- 
 
-;;;; Author: Benjamin E. Lambert (ben@benjaminlambert.com)
-
-
 (asdf:defsystem "optimization"
   :description "Numerical optimization"
   :version "0.1.0"
-  :author "Benjamin Lambert"
-  :licence "All rights reserved"
+  :author "Ben Lambert"
   :serial t
   :components
   ((:module src
@@ -35,13 +31,7 @@
 					       (:file "powell")
 					       (:file "conjugate-gradient")
 					       (:file "bfgs")
-					       (:file "lbfgs")))
-			 ;; (:module press
-			 ;; 	  :serial t
-			 ;; 	  :components ((:file "common")
-			 ;; 		       (:file "gradient")
-			 ;; 		       (:file "powell")))
-			 )))
+					       (:file "lbfgs"))))))
   :depends-on (:lispdoc :blambert-util :split-sequence :alexandria :array-operations :gnuplot))
 
 
@@ -51,7 +41,6 @@
                         :serial t
                         :components ((:file "package")
                                      (:file "test")))))
-
 
 (defmethod perform ((o test-op) (c (eql (find-system :optimization))))
   (operate 'load-op :optimization-test)

@@ -1,17 +1,12 @@
-;;; Copyright Benjamin E. Lambert, 2005-2011
-;;; All rights reserved
-;;; Please contact author regarding licensing and use:
-;;; ben@benjaminlambert.com
+;;;; Author: Ben Lambert
+;;;; ben@benjaminlambert.com
 
 (declaim (optimize (debug 3)))
 (in-package :lm-training)
-(cl-user::file-summary "Printing the progress and graphing the training process")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;; Graphing stuff... ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;; Graphing  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Graphing stuff...")
 
 (defun graph-parameter-sweep (points filename &key (verbose nil) (debug t))
   "Plots a single graph of the objective function over the course of the entire optimization."
@@ -42,8 +37,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;; Training ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Training")
 
 (defun print-non-zero-features (array model)
   "Given an array of feature weights and a model, print out all the non-zero features in a readable format."
@@ -76,7 +69,6 @@
   (let* ((before (pairwise-evaluation model1 pairs))
 	 (after (pairwise-evaluation model2 pairs)))
     (declare (ignore before))
-    ;;(delta (struct-subtract-recursive after before)))
     (format t "********** ~A with model **********~%" prefix)
     (print-summary-results after)))
 
