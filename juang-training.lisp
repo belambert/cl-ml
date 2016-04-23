@@ -1,12 +1,8 @@
-;;; Copyright Benjamin E. Lambert, 2005-2011
-;;; All rights reserved
-;;; Please contact author regarding licensing and use:
+;;; Author: Ben Lambert
 ;;; ben@benjaminlambert.com
 
 (in-package :lm-training)
 (declaim (optimize (debug 3)))
-
-(cl-user::file-summary "")
 
 (defun g-function (sentence lm &key language-weight)
   "This function simply gives us a 'score' for the sentence,
@@ -14,9 +10,7 @@
    Some call it a 'discriminant function'."
   (let* ((alpha (/ language-weight))
 	 (acoustic (sentence-acoustic-score sentence))
-	 ;;(lm-score (log-prob-of-sentence lm sentence))
-	 (lm-score (score lm sentence))
-	 )
+	 (lm-score (score lm sentence)))
     (+ (* alpha acoustic) lm-score)))
 
 (defun little-g-wrapper (sentence lm eta &key language-weight)
@@ -34,14 +28,11 @@
 
 (defun d-function (nbest lm eta &key language-weight)
   "This mis-classification function is called 'd' in the literature."
-  (let (;;(w0 (get-reference-sentence nbest))
-	(w0 (get-lowest-wer-sentence nbest))
-	)
+  (let ((w0 (get-lowest-wer-sentence nbest)))
     (+ (- (g-function w0 lm :language-weight language-weight))
        (big-g-function nbest lm eta :language-weight language-weight))))
 
 ;; Gamma and theta represent....  slope and shift
-
 (defun loss-function (nbest lm eta &key (gamma 1) (theta 0) language-weight)
   "This is the discriminant function embedded in a sigmoid function."
   (/ (+ 1
@@ -96,7 +87,6 @@
     (setf (parameters lm) x)
     (expected-loss-gradient nbests lm eta :gamma gamma :theta theta :language-weight language-weight)))
   
-
 (defun run-juang-training (nbests lm &key (eta 1) (gamma 1) (theta 0))
   (let* ((language-weight (nbest-language-weight (elt nbests 0)))
 	 (function (get-parameterized-expected-loss-function nbests lm eta :gamma gamma :theta theta :language-weight language-weight))
