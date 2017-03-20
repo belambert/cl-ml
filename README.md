@@ -1,6 +1,5 @@
-============
 machine-learning
-============
+================
 
 A hodgepodge of machine learning algorithms written in Lisp.
 
