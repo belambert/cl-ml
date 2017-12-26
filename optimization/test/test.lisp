@@ -1,16 +1,24 @@
-;;;; Author: Benjamin Lambert (ben@benjaminlambert.com)
+;; Copyright 2010-2018 Ben Lambert
 
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
 
-(declaim (optimize (debug 3)))
+;;     http://www.apache.org/licenses/LICENSE-2.0
+
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
+
 (in-package :optimization-test)
-(cl-user::file-summary "Simple numerical optimization")
 
+;;;; Simple numerical optimization
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Test functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Test function(s)")
 
 (defun test-function-a (x)
   "A function that always returns the number 0.  This flat line should be confusing to min/max algorithms,
@@ -36,10 +44,8 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Running the tests ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Running the tests ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(cl-user::section "Running the tests")
 
 (defparameter *1d-tests* '((test-function-b1 10)))
 
@@ -47,8 +53,8 @@
 				 (test-function-c (10 10))
 				 (test-function-d (10 10 10))))
 
-;;(defparameter *linemin-methods* '(:brute :golden-section :brent :dbrent))
-;;(defparameter *linemin-methods* '(:brute :golden-section :brent))
+;; (defparameter *linemin-methods* '(:brute :golden-section :brent :dbrent))
+;; (defparameter *linemin-methods* '(:brute :golden-section :brent))
 (defparameter *linemin-methods* '(:golden-section :brent))
 
 (defparameter *multidim-min-functions* '(coordinate-descent steepest-descent conjugate-gradient-descent bfgs powell))
@@ -84,7 +90,3 @@
 	     (format t "Method: ~30A, Linemin: ~20A Function: ~20A  " opt-function linemin f)
 	     (format t " (Computed: (~{~f~^, ~}), Expected: (~{~f~^, ~}))~%" (coerce value 'list) (coerce reference 'list)))))
     (format t "~:D of ~:D tests passed ~,,2f %~%" pass-count test-count (/ pass-count test-count))))
-
-       
-
-

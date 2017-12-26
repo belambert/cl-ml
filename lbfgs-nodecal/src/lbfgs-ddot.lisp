@@ -1,3 +1,5 @@
+;; GPL?
+
 ;;; Compiled by f2cl version:
 ;;; ("f2cl1.l,v 1.212 2009/01/08 18:58:49 rtoy Exp $"
 ;;;  "f2cl2.l,v 1.37 2008/02/22 22:19:33 rtoy Exp $"
@@ -128,4 +130,3 @@
                         (fortran-to-lisp::integer4))
            :return-values '(nil nil nil nil nil)
            :calls 'nil)))
-

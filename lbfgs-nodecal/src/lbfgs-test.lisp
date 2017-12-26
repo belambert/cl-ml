@@ -1,4 +1,16 @@
+;; Copyright 2010-2018 Ben Lambert
 
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+
+;;     http://www.apache.org/licenses/LICENSE-2.0
+
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
 
 (let* ((n 5 ) ;;variable count, n
       (m 3) ;;corrections per update,  3<= M <=7 is recommended. Restriction: M>0
@@ -51,13 +63,8 @@ C                        not positive).
       |#
        (scache (make-array n :element-type 'double-float :initial-element 0.0d0)))
 
-
-
       ;;  (lbfgs n m x f g diagco diag iprint eps xtol w iflag scache)
       (lbfgs n m initial-solution variable-value-of-f gradient diagco-p diag iprint eps xtol w status-flag scache)
-      
+
       (format t "Status flag: ~A~%" status-flag)
-      (format t "Final solution: ~A~%" initial-solution)
-
-      )
-
+      (format t "Final solution: ~A~%" initial-solution))

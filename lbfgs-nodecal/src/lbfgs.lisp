@@ -1,6 +1,4 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;; L-BFGS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GPL?
 
 (in-package :common-lisp-user)
 
@@ -668,4 +666,3 @@
            :return-values '(fortran-to-lisp::n nil nil nil nil nil nil nil nil
                             nil nil fortran-to-lisp::iflag nil)
            :calls '(fortran-to-lisp::mcsrch fortran-to-lisp::lb1))))
-

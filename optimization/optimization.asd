@@ -1,5 +1,19 @@
 ;;-*- Mode: Lisp -*- 
 
+;; Copyright 2010-2018 Ben Lambert
+
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+
+;;     http://www.apache.org/licenses/LICENSE-2.0
+
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
+
 (asdf:defsystem "optimization"
   :description "Numerical optimization"
   :version "0.1.0"
@@ -34,7 +48,6 @@
 					       (:file "lbfgs"))))))
   :depends-on (:lispdoc :blambert-util :split-sequence :alexandria :array-operations :gnuplot))
 
-
 (defsystem :optimization-test
   :depends-on (:optimization)
   :components ((:module "test"
@@ -45,4 +58,3 @@
 (defmethod perform ((o test-op) (c (eql (find-system :optimization))))
   (operate 'load-op :optimization-test)
   (funcall (intern (symbol-name :run-all-tests) (find-package :optimization-test))))
-

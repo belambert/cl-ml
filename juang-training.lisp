@@ -1,8 +1,18 @@
-;;; Author: Ben Lambert
-;;; ben@benjaminlambert.com
+;; Copyright 2010-2018 Ben Lambert
+
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+
+;;     http://www.apache.org/licenses/LICENSE-2.0
+
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
 
 (in-package :lm-training)
-(declaim (optimize (debug 3)))
 
 (defun g-function (sentence lm &key language-weight)
   "This function simply gives us a 'score' for the sentence,
@@ -93,8 +103,3 @@
 	 (gradient (get-parameterized-expected-loss-gradient-function nbests lm eta :gamma gamma :theta theta :language-weight language-weight)))
     (cl-optimization:conjugate-gradient-descent function (length (parameters lm)) :df gradient)
     lm))
-						
-
-
-
-

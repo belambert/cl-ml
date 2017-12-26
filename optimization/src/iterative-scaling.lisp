@@ -1,11 +1,18 @@
-;;;; Author: Ben Lambert
-;;;; ben@benjaminlambert.com
+;; Copyright 2010-2018 Ben Lambert
+
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+
+;;     http://www.apache.org/licenses/LICENSE-2.0
+
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
 
 (in-package :optimization)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;; Iterative scaling        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun iterative-scaling (&key objective-function feature-expectation-function model data (iterations 10))
   "Run the iterative scaling algorithm.  This requires an objective function, an initial array of parameter values,
@@ -17,8 +24,7 @@
       (setf f (funcall objective-function x model data))
       (format t "Objective function value = ~10,5F~%" f)
       (let ((expected-counts (funcall feature-expectation-function model data)))
-	(is-param-update model expected-counts)
-	))))
+	(is-param-update model expected-counts)))))
 
 (defun is-param-update (model model-predicted-feature-counts)
     "Itertive scaling parmeter update.  The update rule is: 1/M * log (data-exp/model-exp)  .... where M=1??? (for boolean features?)"
@@ -35,4 +41,3 @@
   "???? Not implemented... but this is important for efficiency?"
   (declare (ignore model data))
   (error "Not implemented."))
-

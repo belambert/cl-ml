@@ -1,7 +1,17 @@
-;;;; Author: Ben Lambert
-;;;; ben@benjaminlambert.com
+;; Copyright 2010-2018 Ben Lambert
 
-(declaim (optimize (debug 3)))
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+
+;;     http://www.apache.org/licenses/LICENSE-2.0
+
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
+
 (in-package :lm-training)
 
 (defun contrast-function-as-weight (new-model-file pattern-file &key 
@@ -63,5 +73,3 @@
   "Do a parameter sweep and evaluation of model multipliers."
   (let ((model (make-instance 'pattern-lm-with-contrast-weights :pattern-file pattern-file :abstraction-functions '(identity))))
     (sweep-multiplier model nbests :begin begin :end end :multiplier-list multiplier-list)))
-
-

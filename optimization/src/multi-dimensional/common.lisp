@@ -1,11 +1,18 @@
-;;;; Author: Ben Lambert
-;;;; ben@benjaminlambert.com
+;; Copyright 2010-2018 Ben Lambert
+
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+
+;;     http://www.apache.org/licenses/LICENSE-2.0
+
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
 
 (in-package :optimization)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Misc helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun random-parameters (f n &key x)
   "Return a vector of randomly chosen parameters.  For testing..."
@@ -33,13 +40,3 @@
   (loop for i from 0 below (length (first x-history)) do
        (when (/= (elt (first x-history) i) 0.0)
 	 (format t "~4d. ~{~15,10f ~}~%" i (mapcar (lambda (x) (elt x i)) x-history)))))
-
-
-
-
-
-	      
- 
-
-
-

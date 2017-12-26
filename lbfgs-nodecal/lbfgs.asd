@@ -3,7 +3,7 @@
   :description "Limited-memory BFGS optimization"
   :version "0.1"
   :author "Various"
-  :licence "GPL"
+  :licence "GPL?"
   :components
   ((:module src
 	    :components
@@ -16,4 +16,3 @@
 	     (:file "lbfgs")
 	     (:file "main"))))
   :depends-on (:f2cl))
-

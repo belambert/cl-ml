@@ -1,3 +1,5 @@
+;; GPL?
+
 ;;; Compiled by f2cl version:
 ;;; ("f2cl1.l,v 1.215 2009/04/07 22:05:21 rtoy Exp $"
 ;;;  "f2cl2.l,v 1.37 2008/02/22 22:19:33 rtoy Exp $"
@@ -15,7 +17,6 @@
 ;;;           (:float-format double-float))
 
 (in-package :common-lisp-user)
-
 
 (defun mcstep (stx fx dx sty fy dy stp fp dp brackt stpmin stpmax info)
   (declare (type (f2cl-lib:integer4) info)
@@ -193,4 +194,3 @@
                             fortran-to-lisp::brackt nil nil
                             fortran-to-lisp::info)
            :calls 'nil)))
-
